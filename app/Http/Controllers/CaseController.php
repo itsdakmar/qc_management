@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Defect;
 
 use App\DefectType;
+use App\Responsibility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,7 +30,8 @@ class CaseController extends Controller
     public function create()
     {
         $defectTypes = DefectType::all();
-        return view('cases.create', compact('defectTypes'));
+        $responsibilities = Responsibility::all();
+        return view('cases.create', compact('defectTypes','responsibilities'));
     }
 
     /**
