@@ -13,3 +13,4 @@ yarn-error.log
 /public/argon/css
 /public/argon/js
 /public/argon/vendor
+.idea
