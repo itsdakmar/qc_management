@@ -24,6 +24,8 @@ class CreateCasesTable extends Migration
             $table->smallInteger('priority')->comment('1- Low, 2- Medium, 3- High, 4- Urgent');
             $table->string('image');
             $table->string('remark');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
 
             $table->foreign('defect_type')

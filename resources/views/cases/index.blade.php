@@ -30,13 +30,13 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-hover table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">{{ __('Image') }}</th>
+{{--                                    <th scope="col">{{ __('Image') }}</th>--}}
                                     <th scope="col">{{ __('Name') }}</th>
-                                    <th scope="col">{{ __('Person in charge') }}</th>
                                     <th scope="col">{{ __('Issue Date') }}</th>
+                                    <th scope="col">{{ __('Person in charge') }}</th>
                                     <th scope="col">{{ __('Defect type') }}</th>
                                     <th scope="col">{{ __('Responsibility to fix') }}</th>
                                     <th scope="col">{{ __('Remark') }}</th>
@@ -45,13 +45,13 @@
                             </thead>
                             <tbody>
                                 @foreach ($defects as $defect)
-                                    <tr>
-                                        <td>{{ $defect->image }}</td>
+                                    <tr data-href="{{ route('case.show', $defect) }}">
+{{--                                        <td><img src="{{ $defect->image  }}" width="200px" class="img-thumbnail"></td>--}}
                                         <td>{{ $defect->name }}</td>
+                                        <td>{{ $defect->datetime_issue }}</td>
                                         <td>{{ $defect->pic }}</td>
-                                        <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
                                         <td>{{ $defect->defect_type }}</td>
-                                        <td>{{ $defect->responsibility }}</td>
+                                        <td>{{ $defect->responsibility->name }}</td>
                                         <td>{{ $defect->remark }}</td>
 
                                         <td class="text-right">
@@ -89,7 +89,17 @@
                 </div>
             </div>
         </div>
-            
         @include('layouts.footers.auth')
     </div>
+
+    @push('js')
+        <script type="application/javascript">
+            $(document).ready(function(){
+                $('table tr').click(function(){
+                    window.location = $(this).data('href');
+                    return false;
+                });
+            });
+        </script>
+    @endpush
 @endsection
