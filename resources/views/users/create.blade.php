@@ -43,6 +43,24 @@
                                         </span>
                                     @endif
                                 </div>
+                                <div class="form-group{{ $errors->has('role') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-role">{{ __('Role') }}</label>
+                                    <select class="form-control m-bot15" name="role">
+
+                                        @if ($roles->count())
+                                            @foreach($roles as $role)
+                                                <option value="{{ $role->name }}" >{{ $role->description }}</option>
+                                            @endforeach
+                                        @endif
+
+                                    </select>
+
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-password">{{ __('Password') }}</label>
                                     <input type="password" name="password" id="input-password" class="form-control form-control-alternative{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}" value="" required>

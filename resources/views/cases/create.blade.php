@@ -3,6 +3,7 @@
 @section('content')
     @include('users.partials.header', ['title' => __('Add Defect Reporting')])
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
@@ -156,17 +157,34 @@
 
                                 <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
                                     <label class="form-control-label"
-                                           for="input-email">{{ __('Image / Drawing (PDF)') }}</label>
+                                           for="pro-image">{{ __('Images') }}</label>
                                     <div class="custom-file">
-                                        <input type="file" accept="application/pdf" name="file"
+                                        <input type="file" accept="image/*" name="image[]"
                                                class="form-control-alternative custom-file-input{{ $errors->has('image') ? ' is-invalid' : '' }}"
-                                               id="caseFile" lang="en">
-                                        <label id="file-label" class="custom-file-label" for="caseFile">Choose file to
+                                               id="image" lang="en" multiple>
+                                        <label id="image-label" class="custom-file-label" for="images">Choose images to
                                             upload</label>
                                     </div>
                                     @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('image') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group{{ $errors->has('file') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label"
+                                           for="input-email">{{ __('Drawing (PDF)') }}</label>
+                                    <div class="custom-file">
+                                        <input type="file" accept="application/pdf" name="file"
+                                               class="form-control-alternative custom-file-input{{ $errors->has('file') ? ' is-invalid' : '' }}"
+                                               id="caseFile" lang="en">
+                                        <label id="file-label" class="custom-file-label" for="caseFile">Choose drawing file to
+                                            upload</label>
+                                    </div>
+                                    @if ($errors->has('file'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('file') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -225,6 +243,22 @@
                 $('#caseFile').on('change', function () {
                     let filename = ($(this)[0].files[0]) ? $(this)[0].files[0].name : 'Please Select File';
                     $('#file-label').html(filename);
+                });
+
+                $('#image').on('change', function () {
+                    let files = $(this)[0].files;
+                    let choosenFile = '';
+
+                    for (var i = 0; i < files.length; i++)
+                    {
+                        if(i === 0){
+                            choosenFile += files[i].name ;
+                        }else {
+                            choosenFile += ', '+files[i].name ;
+                        }
+                    }
+
+                    $('#image-label').html(choosenFile);
                 });
             </script>
 

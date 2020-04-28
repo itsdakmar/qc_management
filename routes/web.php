@@ -27,7 +27,12 @@ Route::group(['middleware' => 'auth'], function () {
 	//Role Management
 	Route::resource('role', 'RoleController');
 
+	//Closed Report
+    Route::post('/case/close', 'CaseController@closed_report')->name('report.close');
+
     //Case Management
     Route::resource('case','CaseController');
+
+    Route::get('/report/generate', 'ReportController@index')->name('report.generate');
 });
 

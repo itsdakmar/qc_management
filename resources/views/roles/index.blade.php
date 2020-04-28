@@ -34,6 +34,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">{{ __('Name') }}</th>
+                                    <th scope="col">{{ __('Description') }}</th>
                                     <th scope="col">{{ __('Creation Date') }}</th>
                                     <th scope="col"></th>
                                 </tr>
@@ -42,6 +43,7 @@
                                 @foreach ($roles as $role)
                                     <tr>
                                         <td>{{ $role->name }}</td>
+                                        <td>{{ $role->description }}</td>
 
                                         <td>{{ $role->created_at->format('d/m/Y H:i') }}</td>
                                         <td class="text-right">
