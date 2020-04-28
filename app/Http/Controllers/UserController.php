@@ -32,8 +32,9 @@ class UserController extends Controller
         $createdCount = $this->created;
         $inProgressCount = $this->inprogress;
         $closedCount = $this->closed;
+        $users = $model->paginate(15);
 
-        return view('users.index', ['users' => $model->paginate(15)]);
+        return view('users.index', compact('users','totalCount','createdCount','inProgressCount','closedCount'));
     }
 
     /**
@@ -44,7 +45,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('users.create', compact('roles','totalCount','createdCount','inProgressCount','closedCount'));
+        return view('users.create', compact('roles'));
     }
 
     /**
