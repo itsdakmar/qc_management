@@ -130,7 +130,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="{{ route('report.close', $defect) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('report.close') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <input type="hidden" name="status" value="3">
