@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Defect;
 use App\Role;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,8 @@ use Illuminate\View\View;
 
 class RoleController extends Controller
 {
+    public $total, $created, $inprogress, $closed;
+
     /**
      * Create a new controller instance.
      *
@@ -19,6 +22,11 @@ class RoleController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->total = Defect::count();
+        $this->created = Defect::where('status', 1)->get()->count();
+        $this->inprogress = Defect::where('status', 2)->get()->count();
+        $this->closed = Defect::where('status', 3)->get()->count();
         $this->middleware('auth');
     }
 
@@ -30,7 +38,13 @@ class RoleController extends Controller
      */
     public function index(Role $model)
     {
-        return view('roles.index', ['roles' => $model->paginate(15)]);
+        $totalCount = $this->total;
+        $createdCount = $this->created;
+        $inProgressCount = $this->inprogress;
+        $closedCount = $this->closed;
+        $roles = $model->paginate(15);
+
+        return view('roles.index', compact('roles','totalCount','createdCount','inProgressCount','closedCount'));
     }
 
     /**
