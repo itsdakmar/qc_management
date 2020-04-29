@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Spatie\PdfToImage\Pdf;
+use App\Vendor\Pdf;
 
 class CaseController extends Controller
 {
