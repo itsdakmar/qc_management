@@ -82,7 +82,7 @@ class CaseController extends Controller
         $hashName = Str::replaceLast('.pdf', '', $request->file('file')->hashName());
         $pathToPdf = Storage::disk('public_uploads')->path('uploads/drawing/' . basename($file));
         $pdf = new Pdf($pathToPdf);
-        $pdf->getGhostscript()->setGsPath('C:\gs\gs952\bin\gswin64c.exe');
+        $pdf->getGhostscript()->setGsPath('C:\gs\gs952\bin\gswin32c.exe');
         $pdf->setOutputFormat('png')->saveImage($hashName);
 
         Storage::disk('public_uploads')->delete('uploads/drawing/' . basename($file));
