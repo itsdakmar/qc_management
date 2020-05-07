@@ -40,6 +40,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-image mr-2"></i>Images</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"><i class="ni ni-like-2 mr-2"></i>Closing Information</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card shadow">
@@ -134,6 +137,29 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @if($defect->status == 3)
+                                                <div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel"
+                                                     aria-labelledby="tabs-icons-text-2-tab">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <p>Closed At : <span class="mr-2"><b>{{ $defect->closed_date->format('d / m / Y') }}</b></span>Closed Remark : <span><b>{{ $defect->closed_remark }}</b></span></p>
+                                                                    <h5 class="card-title">Closed Images</h5>
+                                                                        <div class="row">
+                                                                            @foreach($images_closed as $image_closed)
+                                                                                <div class="col">
+                                                                                    <img class="img-thumbnail" src="{{ url('uploads/images',$image_closed->url) }}" alt="{{ $defect->name }}">
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

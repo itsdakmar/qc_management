@@ -33,6 +33,7 @@ class Defect extends Model
      * @var string
      */
     protected $keyType = 'integer';
+    protected $dates = ['closed_date'];
 
     /**
      * @var array
